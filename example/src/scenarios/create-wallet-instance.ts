@@ -5,6 +5,7 @@ import {
 import { error, result } from "./types";
 
 import { WALLET_PROVIDER_BASE_URL } from "@env";
+import appFetch from "../utils/fetch";
 
 const walletProviderBaseUrl = WALLET_PROVIDER_BASE_URL;
 
@@ -19,6 +20,7 @@ export default (integrityContext?: IntegrityContext) => async () => {
     const createdWalletInstance = await WalletInstance.createWalletInstance({
       integrityContext,
       walletProviderBaseUrl,
+      appFetch,
     });
     return result(createdWalletInstance);
   } catch (e) {

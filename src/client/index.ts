@@ -48,7 +48,7 @@ export const getWalletProviderClient = (context: {
         .then(validateResponse)
         .then((res) => {
           const contentType = res.headers.get("content-type");
-          if (contentType === "application/json") {
+          if (contentType?.includes("application/json")) {
             return res.json();
           }
           return res.text();

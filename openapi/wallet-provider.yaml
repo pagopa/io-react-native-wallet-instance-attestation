@@ -2,6 +2,15 @@ openapi: 3.0.3
 info:
   title: IO Wallet
   version: 1.0.0
+
+servers:
+  - url: https://app-backend.io.italia.it/api/v1/wallet
+    description: Production
+  - url: https://io-p-app-appbackendl1-staging.azurewebsites.net/api/v1/wallet
+    description: Staging
+security:
+  - bearerAuth: []
+
 paths:
   /.well-known/openid-federation:
     get:
@@ -114,6 +123,11 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ProblemDetail"
+  securitySchemes:
+    bearerAuth:
+      type: apiKey
+      name: Authorization
+      in: header
 
   schemas:
     ProblemDetail:
