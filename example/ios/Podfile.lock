@@ -73,20 +73,20 @@ PODS:
   - hermes-engine (0.72.14):
     - hermes-engine/Pre-built (= 0.72.14)
   - hermes-engine/Pre-built (0.72.14)
-  - io-react-native-secure-storage (0.1.1):
-    - RCT-Folly (= 2021.07.22.00)
-    - React-Core
   - JOSESwift (2.4.0)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - pagopa-io-react-native-crypto (0.2.3):
     - React-Core
-  - pagopa-io-react-native-integrity (0.3.0):
+  - pagopa-io-react-native-integrity (0.3.1):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - SwiftCBOR
   - pagopa-io-react-native-jwt (1.2.0):
     - JOSESwift (~> 2.3)
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Core
+  - pagopa-io-react-native-secure-storage (0.2.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - RCT-Folly (2021.07.22.00):
@@ -567,12 +567,12 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (= 0.182.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
-  - io-react-native-secure-storage (from `../node_modules/io-react-native-secure-storage`)
   - libevent (~> 2.1.12)
   - OpenSSL-Universal (= 1.1.1100)
   - "pagopa-io-react-native-crypto (from `../node_modules/@pagopa/io-react-native-crypto`)"
   - "pagopa-io-react-native-integrity (from `../node_modules/@pagopa/io-react-native-integrity`)"
   - "pagopa-io-react-native-jwt (from `../node_modules/@pagopa/io-react-native-jwt`)"
+  - "pagopa-io-react-native-secure-storage (from `../node_modules/@pagopa/io-react-native-secure-storage`)"
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -650,14 +650,14 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   hermes-engine:
     :podspec: "../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec"
-  io-react-native-secure-storage:
-    :path: "../node_modules/io-react-native-secure-storage"
   pagopa-io-react-native-crypto:
     :path: "../node_modules/@pagopa/io-react-native-crypto"
   pagopa-io-react-native-integrity:
     :path: "../node_modules/@pagopa/io-react-native-integrity"
   pagopa-io-react-native-jwt:
     :path: "../node_modules/@pagopa/io-react-native-jwt"
+  pagopa-io-react-native-secure-storage:
+    :path: "../node_modules/@pagopa/io-react-native-secure-storage"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -760,13 +760,13 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: b213bace5f31766ad1434d2d9b2cbf04cf92a2b6
-  io-react-native-secure-storage: 5e6f84d27ead13de84f2014ecc767bffdc3e97e9
   JOSESwift: 7ff178bb9173ff42c6e990929a9f2fa702a34f69
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   pagopa-io-react-native-crypto: 93f984df8711eb72f3fb030eca51be6268fc96d6
-  pagopa-io-react-native-integrity: ca77804cefb1cd75d04053652472bcb938ce4b18
+  pagopa-io-react-native-integrity: f7445d78f6239fddd4b22baa8c30a08d55893930
   pagopa-io-react-native-jwt: 662d4e722715996758b079774abea1996b057467
+  pagopa-io-react-native-secure-storage: 5cd527b1b140a4fe3eae3b9c9b6db35780bc81d1
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: 264adaca1d8b1a9c078761891898d4142df05313
   RCTTypeSafety: 279a89da7058a69899778a127be73fab38b84499
