@@ -20,14 +20,6 @@ type CredentialDisplayMetadata = z.infer<typeof CredentialDisplayMetadata>;
 const CredentialDisplayMetadata = z.object({
   name: z.string(),
   locale: z.string(),
-  logo: z
-    .object({
-      url: z.string(),
-      alt_text: z.string(),
-    })
-    .optional(), // TODO [SIW-1268]: should not be optional
-  background_color: z.string().optional(), // TODO [SIW-1268]: should not be optional
-  text_color: z.string().optional(), // TODO [SIW-1268]: should not be optional
 });
 
 // Metadata for displaying issuer information
@@ -37,12 +29,6 @@ type CredentialIssuerDisplayMetadata = z.infer<
 const CredentialIssuerDisplayMetadata = z.object({
   name: z.string(),
   locale: z.string(),
-  logo: z
-    .object({
-      url: z.string(),
-      alt_text: z.string(),
-    })
-    .optional(), // TODO [SIW-1268]: should not be optional
 });
 
 type ClaimsMetadata = z.infer<typeof ClaimsMetadata>;
@@ -70,7 +56,7 @@ const SupportedCredentialMetadata = z.object({
   format: z.union([z.literal("vc+sd-jwt"), z.literal("vc+mdoc-cbor")]),
   scope: z.string(),
   display: z.array(CredentialDisplayMetadata),
-  claims: ClaimsMetadata.optional(), // TODO [SIW-1268]: should not be optional
+  claims: ClaimsMetadata,
   cryptographic_binding_methods_supported: z.array(z.string()),
   credential_signing_alg_values_supported: z.array(z.string()),
   authentic_source: z.string().optional(),
@@ -172,22 +158,15 @@ export const CredentialIssuerEntityConfiguration = BaseEntityConfiguration.and(
         oauth_authorization_server: z.object({
           authorization_endpoint: z.string(),
           pushed_authorization_request_endpoint: z.string(),
-          dpop_signing_alg_values_supported: z.array(z.string()).optional(), // TODO [SIW-1268]: should not be optional
           token_endpoint: z.string(),
-          introspection_endpoint: z.string().optional(), // TODO [SIW-1268]: should not be optional
           client_registration_types_supported: z.array(z.string()),
           code_challenge_methods_supported: z.array(z.string()),
-          authorization_details_types_supported: z.array(z.string()).optional(), // TODO [SIW-1268]: should not be optional,
           acr_values_supported: z.array(z.string()),
           grant_types_supported: z.array(z.string()),
           issuer: z.string(),
           jwks: z.object({ keys: z.array(JWK) }),
           scopes_supported: z.array(z.string()),
-          request_parameter_supported: z.boolean().optional(), // TODO [SIW-1268]: should not be optional
-          request_uri_parameter_supported: z.boolean().optional(), // TODO [SIW-1268]: should not be optional
-          response_types_supported: z.array(z.string()).optional(), // TODO [SIW-1268]: should not be optional
           response_modes_supported: z.array(z.string()),
-          subject_types_supported: z.array(z.string()).optional(), // TODO [SIW-1268]: should not be optional
           token_endpoint_auth_methods_supported: z.array(z.string()),
           token_endpoint_auth_signing_alg_values_supported: z.array(z.string()),
           request_object_signing_alg_values_supported: z.array(z.string()),
