@@ -58,3 +58,8 @@ export function fixBase64EncodingOnKey(key: JWK): JWK {
     ...(n ? { n: removePadding(n) } : {}),
   };
 }
+
+export type JWKS = z.infer<typeof JWKS>;
+export const JWKS = z.object({
+  keys: z.array(JWK),
+});

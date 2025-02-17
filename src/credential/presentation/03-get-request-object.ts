@@ -1,85 +1,62 @@
-import { v4 as uuidv4 } from "uuid";
-import {
-  decode as decodeJwt,
-  sha256ToBase64,
-  verify,
-  type CryptoContext,
-} from "@pagopa/io-react-native-jwt";
-
-import { createDPopToken } from "../../utils/dpop";
-import { NoSuitableKeysFoundInEntityConfiguration } from "./errors";
-import type { EvaluateRelyingPartyTrust } from "./02-evaluate-rp-trust";
 import { hasStatusOrThrow, type Out } from "../../utils/misc";
 import type { StartFlow } from "./01-start-flow";
-import { RequestObject } from "./types";
+import { RequestObjectWalletCapabilities } from "./types";
 
 export type GetRequestObject = (
-  requestUri: Out<StartFlow>["requestURI"],
-  rpConf: Out<EvaluateRelyingPartyTrust>["rpConf"],
+  requestUri: Out<StartFlow>["requestUri"],
   context: {
-    wiaCryptoContext: CryptoContext;
     appFetch?: GlobalFetch["fetch"];
     walletInstanceAttestation: string;
+    walletCapabilities?: RequestObjectWalletCapabilities;
   }
-) => Promise<{ requestObject: RequestObject }>;
+) => Promise<{ requestObjectEncodedJwt: string }>;
 
 /**
- * Obtain the Request Object for RP authentication
+ * Obtain the Request Object for RP authentication. Both the GET and POST `request_uri_method` are supported.
  * @see https://italia.github.io/eudi-wallet-it-docs/versione-corrente/en/relying-party-solution.html
  *
  * @param requestUri The url for the Relying Party to connect with
- * @param rpConf The Relying Party's configuration
- * @param context.wiaCryptoContext The context to access the key associated with the Wallet Instance Attestation
- * @param context.walletInstanceAttestation The Wallet Instance Attestation token
+ * @param rpConf The Relying Party's configuration * @param context.walletInstanceAttestation The Wallet Instance Attestation token
+ * @param context.walletCapabilities (optional) An object containing the wallet technical capabilities that will be sent with a POST request
  * @param context.appFetch (optional) fetch api implementation. Default: built-in fetch
  * @returns The Request Object that describes the presentation
  */
 export const getRequestObject: GetRequestObject = async (
   requestUri,
-  rpConf,
-  { wiaCryptoContext, appFetch = fetch, walletInstanceAttestation }
+  { appFetch = fetch, walletCapabilities }
 ) => {
-  const signedWalletInstanceDPoP = await createDPopToken(
-    {
-      jti: `${uuidv4()}`,
-      htm: "GET",
-      htu: requestUri,
-      ath: await sha256ToBase64(walletInstanceAttestation),
-    },
-    wiaCryptoContext
-  );
+  if (walletCapabilities) {
+    // Validate external input
+    const { wallet_metadata, wallet_nonce } =
+      RequestObjectWalletCapabilities.parse(walletCapabilities);
 
-  const responseEncodedJwt = await appFetch(requestUri, {
-    method: "GET",
-    headers: {
-      Authorization: `DPoP ${walletInstanceAttestation}`,
-      DPoP: signedWalletInstanceDPoP,
-    },
-  })
-    .then(hasStatusOrThrow(200))
-    .then((res) => res.json())
-    .then((responseJson) => responseJson.response);
+    const formUrlEncodedBody = new URLSearchParams({
+      wallet_metadata: JSON.stringify(wallet_metadata),
+      ...(wallet_nonce && { wallet_nonce }),
+    });
 
-  const responseJwt = decodeJwt(responseEncodedJwt);
+    const requestObjectEncodedJwt = await appFetch(requestUri, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: formUrlEncodedBody.toString(),
+    })
+      .then(hasStatusOrThrow(200))
+      .then((res) => res.text());
 
-  // verify token signature according to RP's entity configuration
-  // to ensure the request object is authentic
-  {
-    const pubKey = rpConf.wallet_relying_party.jwks.keys.find(
-      ({ kid }) => kid === responseJwt.protectedHeader.kid
-    );
-    if (!pubKey) {
-      throw new NoSuitableKeysFoundInEntityConfiguration(
-        "Request Object signature verification"
-      );
-    }
-    await verify(responseEncodedJwt, pubKey);
+    return {
+      requestObjectEncodedJwt,
+    };
   }
 
-  // Ensure that the request object conforms to the expected specification.
-  const requestObject = RequestObject.parse(responseJwt.payload);
+  const requestObjectEncodedJwt = await appFetch(requestUri, {
+    method: "GET",
+  })
+    .then(hasStatusOrThrow(200))
+    .then((res) => res.text());
 
   return {
-    requestObject,
+    requestObjectEncodedJwt,
   };
 };

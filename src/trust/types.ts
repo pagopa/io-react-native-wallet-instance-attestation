@@ -1,6 +1,7 @@
 import { UnixTime } from "../sd-jwt/types";
 import { JWK } from "../utils/jwk";
 import * as z from "zod";
+import { PresentationDefinition } from "../credential/presentation/types";
 
 export const TrustMark = z.object({ id: z.string(), trust_mark: z.string() });
 export type TrustMark = z.infer<typeof TrustMark>;
@@ -11,6 +12,8 @@ const RelyingPartyMetadata = z.object({
   client_name: z.string().optional(),
   jwks: z.object({ keys: z.array(JWK) }),
   contacts: z.array(z.string()).optional(),
+  presentation_definition: PresentationDefinition.optional(),
+  presentation_definition_uri: z.string().optional(),
 });
 //.passthrough();
 
@@ -174,7 +177,7 @@ export const CredentialIssuerEntityConfiguration = BaseEntityConfiguration.and(
         /** Credential Issuers act as Relying Party
             when they require the presentation of other credentials.
             This does not apply for PID issuance, which requires CIE authz. */
-        wallet_relying_party: RelyingPartyMetadata.optional(),
+        openid_credential_verifier: RelyingPartyMetadata.optional(),
       }),
     }),
   })
@@ -188,7 +191,7 @@ export const RelyingPartyEntityConfiguration = BaseEntityConfiguration.and(
   z.object({
     payload: z.object({
       metadata: z.object({
-        wallet_relying_party: RelyingPartyMetadata,
+        openid_credential_verifier: RelyingPartyMetadata,
       }),
     }),
   })
