@@ -1,4 +1,3 @@
-import appFetch from "../utils/fetch";
 import { createAppAsyncThunk } from "./utils";
 import {
   createCryptoContextFor,
@@ -56,15 +55,10 @@ export const remoteCrossDevicePresentationThunk = createAppAsyncThunk<
   );
 
   const { requestObjectEncodedJwt } =
-    await Credential.Presentation.getRequestObject(requestUri, {
-      appFetch,
-    });
+    await Credential.Presentation.getRequestObject(requestUri);
 
   const jwks = await Credential.Presentation.fetchJwksFromRequestObject(
-    requestObjectEncodedJwt,
-    {
-      context: { appFetch },
-    }
+    requestObjectEncodedJwt
   );
 
   const { requestObject } =
@@ -74,9 +68,7 @@ export const remoteCrossDevicePresentationThunk = createAppAsyncThunk<
     );
 
   const { presentationDefinition } =
-    await Credential.Presentation.fetchPresentDefinition(requestObject, {
-      appFetch: appFetch,
-    });
+    await Credential.Presentation.fetchPresentDefinition(requestObject);
 
   // We suppose that request is about PID
   // In this case no check about other credentials
@@ -114,14 +106,12 @@ export const remoteCrossDevicePresentationThunk = createAppAsyncThunk<
             pid.credential,
             disclosuresRequestedClaimName,
             credentialCryptoContext,
-          ],
-          { appFetch: appFetch }
+          ]
         )
       : await Credential.Presentation.sendAuthorizationErrorResponse(
           requestObject,
           "access_denied",
-          jwks.keys,
-          { appFetch: appFetch }
+          jwks.keys
         );
 
   return { result: authResponse };

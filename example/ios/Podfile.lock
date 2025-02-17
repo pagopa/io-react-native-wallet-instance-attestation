@@ -527,14 +527,14 @@ PODS:
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-RCTImage
-  - RNSVG (15.10.1):
+  - RNSVG (15.5.0):
     - React-Core
   - SocketRocket (0.6.1)
-  - VisionCamera (4.6.3):
-    - VisionCamera/Core (= 4.6.3)
-    - VisionCamera/React (= 4.6.3)
-  - VisionCamera/Core (4.6.3)
-  - VisionCamera/React (4.6.3):
+  - VisionCamera (4.3.1):
+    - VisionCamera/Core (= 4.3.1)
+    - VisionCamera/React (= 4.3.1)
+  - VisionCamera/Core (4.3.1)
+  - VisionCamera/React (4.3.1):
     - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -805,12 +805,12 @@ SPEC CHECKSUMS:
   RNReactNativeHapticFeedback: e115bb12d05ced2aba090123e2690978507811ca
   RNReanimated: 1896df448c213a64e98cf3f796e4105bbfab41a2
   RNScreens: 284fcee9d8d4648851fdb85dd0e200daebedcc14
-  RNSVG: 7ff26379b2d1871b8571e6f9bc9630de6baf9bdf
+  RNSVG: b986585e367f4a49d8aa43065066cc9c290b3d9b
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  VisionCamera: 598ab83c6bf4d65f5c32ec54361eed866505d388
+  VisionCamera: 58d2120e6e23c155b25f4702b7912dc2b1e5e8c2
   Yoga: c32e0be1a17f8f1f0e633a3122f7666441f52c82
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 819b4a3f14056a5ce6f274f6887a39a331ae53e7
+PODFILE CHECKSUM: 279e6e9e1f0c3770f0e22a444a8873649fb8a696
 
 COCOAPODS: 1.15.2
