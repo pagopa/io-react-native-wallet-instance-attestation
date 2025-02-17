@@ -55,8 +55,8 @@
 		00E356EE1AD99517003FC87E /* IoReactNativeWalletExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IoReactNativeWalletExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* IoReactNativeWalletExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IoReactNativeWalletExampleTests.m; sourceTree = "<group>"; };
-		040DDE708A9A4E56BD32C915 /* RobotoMono-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-BoldItalic.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-BoldItalic.ttf"; sourceTree = "<group>"; };
-		111005E83D4A40699A5CE57E /* DMMono-OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMMono-OFL.txt"; path = "../assets/fonts/DMMono-OFL.txt"; sourceTree = "<group>"; };
+		040DDE708A9A4E56BD32C915 /* RobotoMono-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-BoldItalic.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-BoldItalic.ttf"; sourceTree = "<group>"; };
+		111005E83D4A40699A5CE57E /* DMMono-OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DMMono-OFL.txt"; path = "../assets/fonts/DMMono-OFL.txt"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* IoReactNativeWalletExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IoReactNativeWalletExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = IoReactNativeWalletExample/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = IoReactNativeWalletExample/AppDelegate.mm; sourceTree = "<group>"; };
@@ -64,37 +64,37 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = IoReactNativeWalletExample/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = IoReactNativeWalletExample/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-IoReactNativeWalletExample-IoReactNativeWalletExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IoReactNativeWalletExample-IoReactNativeWalletExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2892DED14B60473D9B580C48 /* LICENSE.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = LICENSE.txt; path = ../assets/fonts/RobotoMono/LICENSE.txt; sourceTree = "<group>"; };
-		291A2E9C27654CA1889BA448 /* TitilliumSansPro-ThinItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-ThinItalic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-ThinItalic.otf"; sourceTree = "<group>"; };
-		309CA7B023954B299C2B076B /* TitilliumSansPro-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-LightItalic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-LightItalic.otf"; sourceTree = "<group>"; };
-		39A26329B16346ABAD843E13 /* TitilliumSansPro-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Bold.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Bold.otf"; sourceTree = "<group>"; };
+		2892DED14B60473D9B580C48 /* LICENSE.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = LICENSE.txt; path = ../assets/fonts/RobotoMono/LICENSE.txt; sourceTree = "<group>"; };
+		291A2E9C27654CA1889BA448 /* TitilliumSansPro-ThinItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-ThinItalic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-ThinItalic.otf"; sourceTree = "<group>"; };
+		309CA7B023954B299C2B076B /* TitilliumSansPro-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-LightItalic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-LightItalic.otf"; sourceTree = "<group>"; };
+		39A26329B16346ABAD843E13 /* TitilliumSansPro-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Bold.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Bold.otf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-IoReactNativeWalletExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoReactNativeWalletExample.debug.xcconfig"; path = "Target Support Files/Pods-IoReactNativeWalletExample/Pods-IoReactNativeWalletExample.debug.xcconfig"; sourceTree = "<group>"; };
-		43E6A6E367694585BAE31D00 /* TitilliumSansPro-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Thin.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Thin.otf"; sourceTree = "<group>"; };
-		46552F5549674F1CB6FF15B2 /* TitilliumSansPro-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Semibold.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Semibold.otf"; sourceTree = "<group>"; };
-		4683D0B61A504DAFA7737A8A /* ReadexPro-OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ReadexPro-OFL.txt"; path = "../assets/fonts/ReadexPro-OFL.txt"; sourceTree = "<group>"; };
-		519C00001FC2425293C57ABD /* TitilliumSansPro-SemiboldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-SemiboldItalic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		43E6A6E367694585BAE31D00 /* TitilliumSansPro-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Thin.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Thin.otf"; sourceTree = "<group>"; };
+		46552F5549674F1CB6FF15B2 /* TitilliumSansPro-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Semibold.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Semibold.otf"; sourceTree = "<group>"; };
+		4683D0B61A504DAFA7737A8A /* ReadexPro-OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ReadexPro-OFL.txt"; path = "../assets/fonts/ReadexPro-OFL.txt"; sourceTree = "<group>"; };
+		519C00001FC2425293C57ABD /* TitilliumSansPro-SemiboldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-SemiboldItalic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-IoReactNativeWalletExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoReactNativeWalletExample.release.xcconfig"; path = "Target Support Files/Pods-IoReactNativeWalletExample/Pods-IoReactNativeWalletExample.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-IoReactNativeWalletExample-IoReactNativeWalletExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoReactNativeWalletExample-IoReactNativeWalletExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-IoReactNativeWalletExample-IoReactNativeWalletExampleTests/Pods-IoReactNativeWalletExample-IoReactNativeWalletExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-IoReactNativeWalletExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IoReactNativeWalletExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		63CECDD82871463FA94E5B3C /* TitilliumSansPro-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Regular.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Regular.otf"; sourceTree = "<group>"; };
-		6E57306315E24808B3784FCB /* RobotoMono-RegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-RegularItalic.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-RegularItalic.ttf"; sourceTree = "<group>"; };
-		7C924FB0CA364954A5EC2D7C /* TitilliumSansPro-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-BoldItalic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-BoldItalic.otf"; sourceTree = "<group>"; };
-		7EB039600E1F47C696BC4993 /* TitilliumSansPro-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Black.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Black.otf"; sourceTree = "<group>"; };
+		63CECDD82871463FA94E5B3C /* TitilliumSansPro-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Regular.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Regular.otf"; sourceTree = "<group>"; };
+		6E57306315E24808B3784FCB /* RobotoMono-RegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-RegularItalic.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-RegularItalic.ttf"; sourceTree = "<group>"; };
+		7C924FB0CA364954A5EC2D7C /* TitilliumSansPro-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-BoldItalic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-BoldItalic.otf"; sourceTree = "<group>"; };
+		7EB039600E1F47C696BC4993 /* TitilliumSansPro-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Black.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Black.otf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = IoReactNativeWalletExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		82835F2F9B9943C7A6A1A8F0 /* DMMono-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMMono-Medium.ttf"; path = "../assets/fonts/DMMono/DMMono-Medium.ttf"; sourceTree = "<group>"; };
+		82835F2F9B9943C7A6A1A8F0 /* DMMono-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DMMono-Medium.ttf"; path = "../assets/fonts/DMMono/DMMono-Medium.ttf"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-IoReactNativeWalletExample-IoReactNativeWalletExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoReactNativeWalletExample-IoReactNativeWalletExampleTests.release.xcconfig"; path = "Target Support Files/Pods-IoReactNativeWalletExample-IoReactNativeWalletExampleTests/Pods-IoReactNativeWalletExample-IoReactNativeWalletExampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		93ADA44255B7403ABC12B050 /* TitilliumSansPro-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Italic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Italic.otf"; sourceTree = "<group>"; };
+		93ADA44255B7403ABC12B050 /* TitilliumSansPro-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Italic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Italic.otf"; sourceTree = "<group>"; };
 		990CE13B2BEA042F009912F6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = IoReactNativeWalletExample/PrivacyInfo.xcprivacy; sourceTree = SOURCE_ROOT; };
-		A15AE5D91CB34EB0A61D8F25 /* TitilliumSansPro-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Light.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Light.otf"; sourceTree = "<group>"; };
-		A8A254B88CF1419AAE829503 /* RobotoMono-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-LightItalic.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-LightItalic.ttf"; sourceTree = "<group>"; };
-		AE390E6723934F8D94A12CE7 /* RobotoMono-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-Bold.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-Bold.ttf"; sourceTree = "<group>"; };
-		B7E60117481E41E9BE216D24 /* RobotoMono-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-Light.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-Light.ttf"; sourceTree = "<group>"; };
+		A15AE5D91CB34EB0A61D8F25 /* TitilliumSansPro-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-Light.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-Light.otf"; sourceTree = "<group>"; };
+		A8A254B88CF1419AAE829503 /* RobotoMono-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-LightItalic.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-LightItalic.ttf"; sourceTree = "<group>"; };
+		AE390E6723934F8D94A12CE7 /* RobotoMono-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-Bold.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-Bold.ttf"; sourceTree = "<group>"; };
+		B7E60117481E41E9BE216D24 /* RobotoMono-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-Light.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-Light.ttf"; sourceTree = "<group>"; };
 		BCF79CDE2C3D2AD800D4948E /* IoReactNativeWalletExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = IoReactNativeWalletExample.entitlements; path = IoReactNativeWalletExample/IoReactNativeWalletExample.entitlements; sourceTree = "<group>"; };
-		DE355170BFD14939AAA3B74B /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-Regular.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
-		E41010E1B8B94185A0100A46 /* ReadexPro-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ReadexPro-Regular.ttf"; path = "../assets/fonts/ReadexPro/ReadexPro-Regular.ttf"; sourceTree = "<group>"; };
-		EC2D199A60474F2EB4481B1D /* TitilliumSansPro-OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-OFL.txt"; path = "../assets/fonts/TitilliumSansPro-OFL.txt"; sourceTree = "<group>"; };
+		DE355170BFD14939AAA3B74B /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-Regular.ttf"; path = "../assets/fonts/RobotoMono/RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
+		E41010E1B8B94185A0100A46 /* ReadexPro-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ReadexPro-Regular.ttf"; path = "../assets/fonts/ReadexPro/ReadexPro-Regular.ttf"; sourceTree = "<group>"; };
+		EC2D199A60474F2EB4481B1D /* TitilliumSansPro-OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-OFL.txt"; path = "../assets/fonts/TitilliumSansPro-OFL.txt"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F2548BDA338042D48F4BA351 /* TitilliumSansPro-BlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-BlackItalic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-BlackItalic.otf"; sourceTree = "<group>"; };
+		F2548BDA338042D48F4BA351 /* TitilliumSansPro-BlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "TitilliumSansPro-BlackItalic.otf"; path = "../assets/fonts/TitilliumSansPro/TitilliumSansPro-BlackItalic.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +188,6 @@
 				EC2D199A60474F2EB4481B1D /* TitilliumSansPro-OFL.txt */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -550,7 +549,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = IoReactNativeWalletExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -575,7 +574,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = M2X5YQ4BJ7;
 				INFOPLIST_FILE = IoReactNativeWalletExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -603,6 +602,7 @@
 				DEVELOPMENT_TEAM = M2X5YQ4BJ7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = IoReactNativeWalletExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -631,6 +631,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M2X5YQ4BJ7;
 				INFOPLIST_FILE = IoReactNativeWalletExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -698,7 +699,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -772,7 +773,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
