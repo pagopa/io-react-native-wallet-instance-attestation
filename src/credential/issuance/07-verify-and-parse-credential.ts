@@ -7,6 +7,7 @@ import { verify as verifySdJwt } from "../../sd-jwt";
 import { getValueFromDisclosures } from "../../sd-jwt/converters";
 import type { JWK } from "../../utils/jwk";
 import type { ObtainCredential } from "./06-obtain-credential";
+import { CredentialSdJwtClaims } from "../../entity/openid-connect/issuer/types";
 
 export type VerifyAndParseCredential = (
   issuerConf: Out<GetIssuerConfig>["issuerConf"],
@@ -75,7 +76,8 @@ const parseCredentialSdJwt = (
   if (!credentialSubject.claims) {
     throw new IoWalletError("Missing claims in the credential subject"); // TODO [SIW-1268]: should not be optional
   }
-  const attrDefinitions = Object.entries(credentialSubject.claims);
+  const claims = credentialSubject.claims as CredentialSdJwtClaims;
+  const attrDefinitions = Object.entries(claims);
 
   // the key of the attribute defintion must match the disclosure's name
   const attrsNotInDisclosures = attrDefinitions.filter(
@@ -249,6 +251,17 @@ export const verifyAndParseCredential: VerifyAndParseCredential = async (
       format,
       context
     );
+  }
+  if (format === "mso_mdoc") {
+    /**
+     * The current implementation for the "mso_mdoc" format is temporary and returns a placeholder response.
+     * [WLEO-266] This will be replaced with the real implementation once the verifyAndParseCredentialMdoc function is available.
+     **/
+    return {
+      parsedCredential: {} as unknown as ParsedCredential,
+      expiration: new Date(),
+      issuedAt: new Date(),
+    };
   }
 
   throw new IoWalletError(`Unsupported credential format: ${format}`);

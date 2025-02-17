@@ -19,8 +19,10 @@ import { useDebugInfo } from "../hooks/useDebugInfo";
 export const CredentialScreen = () => {
   const dispatch = useAppDispatch();
 
-  const mdlState = useAppSelector(selectCredentialAsyncStatus("MDL"));
-  const mdl = useAppSelector(selectCredential("MDL"));
+  const mdlState = useAppSelector(
+    selectCredentialAsyncStatus("org.iso.18013.5.1.mDL")
+  );
+  const mdl = useAppSelector(selectCredential("org.iso.18013.5.1.mDL"));
 
   const dcState = useAppSelector(
     selectCredentialAsyncStatus("EuropeanDisabilityCard")
@@ -45,7 +47,10 @@ export const CredentialScreen = () => {
     () => [
       {
         title: "Get credential (MDL)",
-        onPress: () => dispatch(getCredentialThunk({ credentialType: "MDL" })),
+        onPress: () =>
+          dispatch(
+            getCredentialThunk({ credentialType: "org.iso.18013.5.1.mDL" })
+          ),
         isLoading: mdlState.isLoading,
         hasError: mdlState.hasError,
         isDone: mdlState.isDone,

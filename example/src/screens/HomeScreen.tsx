@@ -48,15 +48,15 @@ const HomeScreen = () => {
             ? navigation.navigate("Pid")
             : Alert.alert("Create a wallet instance first"),
       },
-      // {
-      //   label: "Credentials",
-      //   description: "Obtain a credential with PID authentication",
-      //   icon: "chevronRight",
-      //   onPress: () =>
-      //     pid && hasIntegrityKeyTag
-      //       ? navigation.navigate("Credentials")
-      //       : Alert.alert("Register a wallet instance and obtain a PID first"),
-      // },
+      {
+        label: "Credentials",
+        description: "Obtain a credential with PID authentication",
+        icon: "chevronRight",
+        onPress: () =>
+          pid && hasIntegrityKeyTag
+            ? navigation.navigate("Credentials")
+            : Alert.alert("Register a wallet instance and obtain a PID first"),
+      },
       // {
       //   label: "Status Attestation",
       //   description: "Obtain the status attestation of a credential",

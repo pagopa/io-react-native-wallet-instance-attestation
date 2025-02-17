@@ -11,6 +11,10 @@ import type {
   CredentialResult,
   SupportedCredentialsWithoutPid,
 } from "../store/types";
+import {
+  openAuthenticationSession,
+  supportsInAppBrowser,
+} from "@pagopa/io-react-native-login-utils";
 
 /**
  * Implements a flow to obtain a generic credential.
@@ -69,22 +73,59 @@ export const getCredential = async ({
       }
     );
 
-  const requestObject =
-    await Credential.Issuance.getRequestedCredentialToBePresented(
-      issuerRequestUri,
-      clientId,
-      issuerConf,
-      appFetch
-    );
+  /**
+   * Temporary comments to permit issuing of mDL without PID presentation
+   * Replace with block code below which redirects to the issuer's authorization URL
+   * FIXME: [WLEO-267]
+   **/
+
+  // const requestObject =
+  //   await Credential.Issuance.getRequestedCredentialToBePresented(
+  //     issuerRequestUri,
+  //     clientId,
+  //     issuerConf,
+  //     appFetch
+  //   );
 
   // The app here should ask the user to confirm the required data contained in the requestObject
 
   // Complete the user authorization via form_post.jwt mode
+  // const { code } =
+  //   await Credential.Issuance.completeUserAuthorizationWithFormPostJwtMode(
+  //     requestObject,
+  //     { wiaCryptoContext, pidCryptoContext, pid, walletInstanceAttestation }
+  //   );
+  // Start user authorization
+
+  if (!pid || !pidCryptoContext) {
+    throw new Error("PID must not be empty!");
+  }
+
+  // Obtain the Authorization URL
+  const { authUrl } = await Credential.Issuance.buildAuthorizationUrl(
+    issuerRequestUri,
+    clientId,
+    issuerConf
+  );
+
+  const supportsCustomTabs = await supportsInAppBrowser();
+  if (!supportsCustomTabs) {
+    throw new Error("Custom tabs are not supported");
+  }
+
+  const baseRedirectUri = new URL(redirectUri).protocol.replace(":", "");
+
+  // Open the authorization URL in the custom tab
+  const authRedirectUrl = await openAuthenticationSession(
+    authUrl,
+    baseRedirectUri
+  );
+
   const { code } =
-    await Credential.Issuance.completeUserAuthorizationWithFormPostJwtMode(
-      requestObject,
-      { wiaCryptoContext, pidCryptoContext, pid, walletInstanceAttestation }
+    await Credential.Issuance.completeUserAuthorizationWithQueryMode(
+      authRedirectUrl
     );
+  /* End of temporary block code */
 
   // Generate the DPoP context which will be used for the whole issuance flow
   await regenerateCryptoKey(DPOP_KEYTAG);

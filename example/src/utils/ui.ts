@@ -5,7 +5,7 @@ export const iconByCredentialType: Record<
   SupportedCredentialsWithoutPid,
   IOIcons
 > = {
-  MDL: "car",
+  "org.iso.18013.5.1.mDL": "car",
   EuropeanDisabilityCard: "accessibility",
   EuropeanHealthInsuranceCard: "healthCard",
 };
@@ -14,7 +14,7 @@ export const labelByCredentialType: Record<
   SupportedCredentialsWithoutPid,
   string
 > = {
-  MDL: "MDL",
+  "org.iso.18013.5.1.mDL": "MDL",
   EuropeanDisabilityCard: "DC",
   EuropeanHealthInsuranceCard: "TS",
 };

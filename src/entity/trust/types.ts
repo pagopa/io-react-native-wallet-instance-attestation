@@ -70,7 +70,7 @@ const IssuanceErrorSupported = z.object({
 // Metadata for a credentia which is supported by a Issuer
 type SupportedCredentialMetadata = z.infer<typeof SupportedCredentialMetadata>;
 const SupportedCredentialMetadata = z.object({
-  format: z.union([z.literal("vc+sd-jwt"), z.literal("vc+mdoc-cbor")]),
+  format: z.union([z.literal("vc+sd-jwt"), z.literal("mso_mdoc")]),
   scope: z.string(),
   display: z.array(CredentialDisplayMetadata),
   claims: ClaimsMetadata.optional(), // TODO [SIW-1268]: should not be optional

@@ -39,22 +39,22 @@ type CredentialState = {
 // Initial state for the credential slice
 const initialState: CredentialState = {
   credentials: {
-    MDL: undefined,
+    "org.iso.18013.5.1.mDL": undefined,
     EuropeanDisabilityCard: undefined,
     EuropeanHealthInsuranceCard: undefined,
   },
   credentialsAsyncStatus: {
-    MDL: asyncStatusInitial,
+    "org.iso.18013.5.1.mDL": asyncStatusInitial,
     EuropeanDisabilityCard: asyncStatusInitial,
     EuropeanHealthInsuranceCard: asyncStatusInitial,
   },
   statusAttestation: {
-    MDL: undefined,
+    "org.iso.18013.5.1.mDL": undefined,
     EuropeanDisabilityCard: undefined,
     EuropeanHealthInsuranceCard: undefined,
   },
   statusAttAsyncStatus: {
-    MDL: asyncStatusInitial,
+    "org.iso.18013.5.1.mDL": asyncStatusInitial,
     EuropeanDisabilityCard: asyncStatusInitial,
     EuropeanHealthInsuranceCard: asyncStatusInitial,
   },

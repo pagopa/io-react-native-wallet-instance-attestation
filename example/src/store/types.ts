@@ -34,7 +34,7 @@ export type AsyncStatus = {
  */
 export type SupportedCredentials =
   | "urn:eu.europa.ec.eudi:pid:1"
-  | "MDL"
+  | "org.iso.18013.5.1.mDL"
   | "EuropeanDisabilityCard"
   | "EuropeanHealthInsuranceCard";
 
