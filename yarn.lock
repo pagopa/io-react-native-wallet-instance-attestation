@@ -2208,10 +2208,10 @@
   resolved "https://registry.yarnpkg.com/@pagopa/io-react-native-crypto/-/io-react-native-crypto-0.2.3.tgz#395a001e6fc831897dd979a7994950457b637328"
   integrity sha512-cXJBwBsPUBxIFoTVXqlVc2zNgUuFPVdtIKu0WUyEGg8ZNOMGT9cRpE/qYx2uTY+hrYxtO8RKH6aXLsF43mYRBA==
 
-"@pagopa/io-react-native-jwt@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@pagopa/io-react-native-jwt/-/io-react-native-jwt-2.0.0.tgz#94225877f64a3bf7b7839880864f086109989995"
-  integrity sha512-GapO/oob7JmiBQ0TE2jJfeI+BEQRrxp3xL/zfkasb/jsq9m1eJuz+bEj4Wp+lQ2kQr3L9GYFMI8XrKkJfFzO4Q==
+"@pagopa/io-react-native-jwt@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@pagopa/io-react-native-jwt/-/io-react-native-jwt-2.1.0.tgz#a25efcf58d4efddb48db05053321d2ed79b69a74"
+  integrity sha512-KLesesGbDmQorBiqx6rMTh0gRMfTNv6JT8yHOIU89maESWkR0bjt/s0eBKyz45uWoBuPY2NmAq/Aubk/aEjHsQ==
   dependencies:
     js-base64 "^3.7.7"
     zod "^3.22.4"
@@ -6169,10 +6169,10 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonpath-plus@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-10.2.0.tgz#84d680544d9868579cc7c8f59bbe153a5aad54c4"
-  integrity sha512-T9V+8iNYKFL2n2rF+w02LBOT2JjDnTjioaNFrxRy0Bv1y/hNsqR/EBK7Ojy2ythRHwmz2cRIls+9JitQGZC/sw==
+jsonpath-plus@^10.3.0:
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-10.3.0.tgz#59e22e4fa2298c68dfcd70659bb47f0cad525238"
+  integrity sha512-8TNmfeTCk2Le33A3vRRwtuworG/L5RrgMvdjhKZxvyShO+mBu2fP50OWUjRLNtvw344DdDarFh9buFAZs5ujeA==
   dependencies:
     "@jsep-plugin/assignment" "^1.3.0"
     "@jsep-plugin/regex" "^1.0.4"

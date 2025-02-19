@@ -12,6 +12,16 @@ export type Presentation = [
   /* the context for the key associated to the credential */ CryptoContext
 ];
 
+/**
+ * A object that associate the information needed to multiple remote presentation
+ */
+export type RemotePresentation = {
+  requestedClaims: string[];
+  inputDescriptor: InputDescriptor;
+  format: string;
+  vpToken: string;
+};
+
 const Fields = z.object({
   path: z.array(z.string().min(1)), // Array of JSONPath string expressions
   id: z.string().optional(), // Unique string ID
@@ -111,7 +121,7 @@ export type DirectAuthorizationBodyPayload = z.infer<
 >;
 export const DirectAuthorizationBodyPayload = z.union([
   z.object({
-    vp_token: z.string(),
+    vp_token: z.union([z.string(), z.array(z.string())]).optional(),
     presentation_submission: z.record(z.string(), z.unknown()),
   }),
   z.object({ error: ErrorResponse }),

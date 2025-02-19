@@ -71,3 +71,19 @@ export class MissingDataError extends IoWalletError {
     super(message);
   }
 }
+
+/**
+ * When a credential is not found in the wallet.
+ *
+ */
+export class CredentialNotFoundError extends IoWalletError {
+  code = "ERR_CREDENTIAL_NOT_FOUND";
+
+  /**
+   * @param credentialId The ID of the credential that was not found.
+   */
+  constructor(credentialId: string) {
+    const message = `Credential not found: ${credentialId}.`;
+    super(message);
+  }
+}

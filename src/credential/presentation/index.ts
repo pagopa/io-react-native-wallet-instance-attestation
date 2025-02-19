@@ -21,8 +21,10 @@ import {
   type FetchPresentationDefinition,
 } from "./06-fetch-presentation-definition";
 import {
-  evaluateInputDescriptorForSdJwt4VC,
-  type EvaluateInputDescriptorSdJwt4VC,
+  evaluateInputDescriptors,
+  prepareRemotePresentations,
+  type EvaluateInputDescriptors,
+  type PrepareRemotePresentations,
 } from "./07-evaluate-input-descriptor";
 import {
   sendAuthorizationResponse,
@@ -40,9 +42,10 @@ export {
   fetchJwksFromConfig,
   verifyRequestObjectSignature,
   fetchPresentDefinition,
-  evaluateInputDescriptorForSdJwt4VC,
+  evaluateInputDescriptors,
   sendAuthorizationResponse,
   sendAuthorizationErrorResponse,
+  prepareRemotePresentations,
   Errors,
 };
 export type {
@@ -52,7 +55,8 @@ export type {
   FetchJwks,
   VerifyRequestObjectSignature,
   FetchPresentationDefinition,
-  EvaluateInputDescriptorSdJwt4VC,
+  EvaluateInputDescriptors,
+  PrepareRemotePresentations,
   SendAuthorizationResponse,
   SendAuthorizationErrorResponse,
 };

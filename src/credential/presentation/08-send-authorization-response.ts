@@ -1,19 +1,13 @@
-import {
-  EncryptJwe,
-  SignJWT,
-  sha256ToBase64,
-} from "@pagopa/io-react-native-jwt";
+import { EncryptJwe } from "@pagopa/io-react-native-jwt";
 import uuid from "react-native-uuid";
 import type { FetchJwks } from "./04-retrieve-rp-jwks";
 import type { VerifyRequestObjectSignature } from "./05-verify-request-object";
 import { NoSuitableKeysFoundInEntityConfiguration } from "./errors";
 import { hasStatusOrThrow, type Out } from "../../utils/misc";
-import { disclose } from "../../sd-jwt";
 import {
   DirectAuthorizationBodyPayload,
   ErrorResponse,
-  PresentationDefinition,
-  type Presentation,
+  type RemotePresentation,
 } from "./types";
 import * as z from "zod";
 import type { JWK } from "../../utils/jwk";
@@ -55,78 +49,6 @@ export const choosePublicKeyToEncrypt = (
 };
 
 /**
- * Prepares a Verified Presentation (VP) token to be sent as part of an
- * authorization response in an OpenID 4 Verifiable Presentations flow.
- *
- * @param requestObject - The request object containing the nonce, response URI, and other necessary info.
- * @param presentationTuple - A tuple containing a verifiable credential, the claims to disclose,
- *                            and a cryptographic context for signing.
- * @returns An object containing the signed VP token (`vp_token`) and a `presentation_submission` object.
- * @param presentationDefinition - Definition outlining presentation requirements.
- * @param presentationTuple - Tuple containing:
- *    - A verifiable credential.
- *    - Claims that should be disclosed.
- *    - Cryptographic context for signing.
- * @returns An object with:
- *    - `vp_token`: The signed VP token.
- *    - `presentation_submission`: Object mapping disclosed credentials to the request.
- *
- * @remarks
- *  1. The `disclose()` function is used to produce a token with only the requested claims.
- *  2. A new JWT is then signed, including the VP, `jti`, `iss`, `nonce`, audience, and expiration.
- *  3. The `presentation_submission` object follows the OpenID 4 VP specification for describing
- *     how the disclosed credentials map to the request.
- *
- * @todo [SIW-353] Support multiple verifiable credentials in a single request.
- */
-export const prepareVpToken = async (
-  requestObject: Out<VerifyRequestObjectSignature>["requestObject"],
-  presentationDefinition: PresentationDefinition,
-  [verifiableCredential, requestedClaims, cryptoContext]: Presentation
-): Promise<{
-  vp_token: string;
-  presentation_submission: Record<string, unknown>;
-}> => {
-  // Produce a VP token with only requested claims from the verifiable credential
-  const { token: vp } = await disclose(verifiableCredential, requestedClaims);
-
-  // <Issuer-signed JWT>~<Disclosure 1>~<Disclosure N>~
-  const sd_hash = await sha256ToBase64(`${vp}~`);
-
-  const kbJwt = await new SignJWT(cryptoContext)
-    .setProtectedHeader({
-      typ: "kb+jwt",
-      alg: "ES256",
-    })
-    .setPayload({
-      sd_hash,
-      nonce: requestObject.nonce,
-    })
-    .setAudience(requestObject.client_id)
-    .setIssuedAt()
-    .sign();
-
-  // <Issuer-signed JWT>~<Disclosure 1>~...~<Disclosure N>~<KB-JWT>
-  const vp_token = [vp, kbJwt].join("~");
-
-  // Determine the descriptor ID to use for mapping. Fallback to first input descriptor ID if not specified
-  // We support only one credential for now, so we get first input_descriptor and create just one descriptor_map
-  const presentation_submission = {
-    id: uuid.v4(),
-    definition_id: presentationDefinition.id,
-    descriptor_map: [
-      {
-        id: presentationDefinition?.input_descriptors[0]?.id,
-        path: `$`,
-        format: "vc+sd-jwt",
-      },
-    ],
-  };
-
-  return { vp_token, presentation_submission };
-};
-
-/**
  * Builds a URL-encoded form body for a direct POST response without encryption.
  *
  * @param requestObject - Contains state, nonce, and other relevant info.
@@ -141,7 +63,12 @@ export const buildDirectPostBody = async (
     state: requestObject.state,
     ...Object.fromEntries(
       Object.entries(payload).map(([key, value]) => {
-        return [key, typeof value === "object" ? JSON.stringify(value) : value];
+        return [
+          key,
+          Array.isArray(value) || typeof value === "object"
+            ? JSON.stringify(value)
+            : value,
+        ];
       })
     ),
   });
@@ -200,9 +127,9 @@ export const buildDirectPostJwtBody = async (
  */
 export type SendAuthorizationResponse = (
   requestObject: Out<VerifyRequestObjectSignature>["requestObject"],
-  presentationDefinition: PresentationDefinition,
+  presentationDefinitionId: string,
   jwkKeys: Out<FetchJwks>["keys"],
-  presentation: Presentation, // TODO: [SIW-353] support multiple presentations
+  remotePresentations: RemotePresentation[],
   context?: {
     appFetch?: GlobalFetch["fetch"];
   }
@@ -221,17 +148,36 @@ export type SendAuthorizationResponse = (
  */
 export const sendAuthorizationResponse: SendAuthorizationResponse = async (
   requestObject,
-  presentationDefinition,
+  presentationDefinitionId,
   jwkKeys,
-  presentation,
+  remotePresentations,
   { appFetch = fetch } = {}
 ): Promise<AuthorizationResponse> => {
-  // 1. Create the VP token and associated submission mapping
-  const { vp_token, presentation_submission } = await prepareVpToken(
-    requestObject,
-    presentationDefinition,
-    presentation
+  /**
+   * 1. Prepare the VP token and presentation submission
+   * If there is only one credential, `vpToken` is a single string.
+   * If there are multiple credential, `vpToken` is an array of string.
+   **/
+  const vp_token =
+    remotePresentations?.length === 1
+      ? remotePresentations[0]?.vpToken
+      : remotePresentations.map(
+          (remotePresentation) => remotePresentation.vpToken
+        );
+
+  const descriptor_map = remotePresentations.map(
+    (remotePresentation, index) => ({
+      id: remotePresentation.inputDescriptor.id,
+      path: remotePresentations.length === 1 ? `$` : `$[${index}]`,
+      format: remotePresentation.format,
+    })
   );
+
+  const presentation_submission = {
+    id: uuid.v4(),
+    definition_id: presentationDefinitionId,
+    descriptor_map,
+  };
 
   // 2. Choose the appropriate request body builder based on response mode
   const requestBody =

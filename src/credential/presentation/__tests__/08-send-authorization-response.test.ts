@@ -1,6 +1,5 @@
 import {
   choosePublicKeyToEncrypt,
-  prepareVpToken,
   buildDirectPostBody,
   buildDirectPostJwtBody,
   sendAuthorizationResponse,
@@ -8,16 +7,11 @@ import {
 } from "../08-send-authorization-response";
 
 // Mocks for external modules
-import { disclose } from "../../../sd-jwt";
 import { hasStatusOrThrow } from "../../../utils/misc";
-import type { PresentationDefinition, RequestObject } from "../types";
+import type { RemotePresentation } from "../types";
 import { EncryptJwe } from "@pagopa/io-react-native-jwt";
 // We’ll use Jest’s mocking utilities here.
 // Adjust to your project’s actual structure.
-
-jest.mock("../../../sd-jwt", () => ({
-  disclose: jest.fn(),
-}));
 
 jest.mock("../../../wallet-instance-attestation", () => ({
   decode: jest.fn(),
@@ -57,63 +51,6 @@ describe("chooseRSAPublicKeyToEncrypt", () => {
 
     const chosenKey = choosePublicKeyToEncrypt(mockKeys as any);
     expect(chosenKey).toEqual(mockKeys[1]);
-  });
-});
-
-describe("prepareVpToken", () => {
-  const mockRequestObject = {
-    nonce: "mock_nonce",
-    response_uri: "https://mock.rp/response",
-    scope: "mock_scope",
-    presentation_definition: {
-      id: "mock_presentation_definition_id",
-      input_descriptors: [{ id: "mock_descriptor_id" }],
-    },
-  } as unknown as RequestObject;
-
-  const mockPresentationDefinition = {
-    id: "mock_presentation_definition_id",
-    input_descriptors: {
-      id: "mock_input_descriptor_id",
-    },
-  } as unknown as PresentationDefinition;
-
-  const mockPresentation: any = [
-    { vc: "mock_vc" }, // Simplified; actual code expects [vc, claims, cryptCtx]
-    { claims: "mock_claims" },
-    {
-      getPublicKey: jest.fn().mockResolvedValue({ kid: "mock_kid" }),
-    },
-  ];
-
-  beforeEach(() => {
-    (disclose as jest.Mock).mockResolvedValue({ token: "mock_disclosed_vp" });
-  });
-
-  it("should return a vp_token and presentation_submission", async () => {
-    const result = await prepareVpToken(
-      mockRequestObject,
-      mockPresentationDefinition,
-      mockPresentation
-    );
-
-    expect(disclose).toHaveBeenCalledWith(
-      mockPresentation[0],
-      mockPresentation[1]
-    );
-
-    // Check the shape of the returned object
-    expect(result).toHaveProperty(
-      "vp_token",
-      "mock_disclosed_vp~mock_signed_kbjwt"
-    );
-    expect(result).toHaveProperty("presentation_submission");
-    expect(result.presentation_submission).toHaveProperty("id");
-    expect(result.presentation_submission).toHaveProperty(
-      "definition_id",
-      mockRequestObject.presentation_definition?.id
-    );
-    expect(result.presentation_submission).toHaveProperty("descriptor_map");
   });
 });
 
@@ -185,18 +122,14 @@ describe("sendAuthorizationResponse", () => {
       input_descriptors: [{ id: "mock_descriptor_id" }],
     },
   };
-  const mockPresentationDefinition = {
-    id: "mock_presentation_definition_id",
-    input_descriptors: {
-      id: "mock_input_descriptor_id",
+  const mockPresentationDefinitionId = "mock_presentation_definition_id";
+  const mockRemotePresentations = [
+    {
+      inputDescriptor: { id: "descriptor1", format: "jwt" },
+      vpToken: "mock_vp_token",
     },
-  } as unknown as PresentationDefinition;
+  ] as unknown as RemotePresentation[];
   const mockRpJwKeys: any = [{ kid: "rsa-key-enc", use: "enc", kty: "RSA" }];
-  const mockPresentation: any = [
-    "mock_vc",
-    "mock_claims",
-    { getPublicKey: jest.fn().mockResolvedValue({ kid: "mock_kid" }) },
-  ];
 
   beforeEach(() => {
     mockFetch = jest.fn();
@@ -211,9 +144,9 @@ describe("sendAuthorizationResponse", () => {
   it("should use buildDirectPostBody when response_mode is direct_post", async () => {
     const res = await sendAuthorizationResponse(
       mockRequestObject as any,
-      mockPresentationDefinition,
+      mockPresentationDefinitionId,
       mockRpJwKeys,
-      mockPresentation,
+      mockRemotePresentations,
       { appFetch: mockFetch }
     );
 
@@ -231,18 +164,55 @@ describe("sendAuthorizationResponse", () => {
       ...mockRequestObject,
       response_mode: "direct_post.jwt",
     };
+    const multipleRemotePresentations = [
+      ...mockRemotePresentations,
+      {
+        inputDescriptor: { id: "descriptor2", format: "jwt" },
+        vpToken: "mock_vp_token2",
+      },
+    ] as unknown as RemotePresentation[];
 
     await sendAuthorizationResponse(
       directPostJwtRequest as any,
-      mockPresentationDefinition,
+      mockPresentationDefinitionId,
       mockRpJwKeys,
-      mockPresentation,
+      multipleRemotePresentations,
       { appFetch: mockFetch }
     );
 
     // Expect that the returned body is "response=mock_encrypted_jwe"
     const [[, { body }]] = mockFetch.mock.calls;
     expect(body).toContain("response=mock_encrypted_jwe");
+  });
+
+  it("should handle multiple remote presentations by returning an array for vp_token", async () => {
+    const directPostJwtRequest = {
+      ...mockRequestObject,
+      response_mode: "direct_post",
+    };
+    const multipleRemotePresentations = [
+      ...mockRemotePresentations,
+      {
+        inputDescriptor: { id: "descriptor2", format: "jwt" },
+        vpToken: "mock_vp_token2",
+      },
+    ] as unknown as RemotePresentation[];
+
+    await sendAuthorizationResponse(
+      directPostJwtRequest as any,
+      mockPresentationDefinitionId,
+      mockRpJwKeys,
+      multipleRemotePresentations,
+      { appFetch: mockFetch }
+    );
+
+    const options = mockFetch.mock.calls[0][1];
+    const params = new URLSearchParams(options.body);
+    const vpTokenValue = params.get("vp_token");
+    expect(JSON.parse(vpTokenValue as string)).toEqual([
+      "mock_vp_token",
+      "mock_vp_token2",
+    ]);
   });
 });
 

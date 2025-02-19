@@ -13,7 +13,7 @@
   "dependencies": {
     "@pagopa/io-app-design-system": "^1.43.0",
     "@pagopa/io-react-native-crypto": "^0.2.3",
-    "@pagopa/io-react-native-jwt": "^2.0.0",
+    "@pagopa/io-react-native-jwt": "^2.1.0",
     "@pagopa/io-react-native-login-utils": "^1.0.8",
     "@react-native-async-storage/async-storage": "^1.24.0",
     "@react-native-clipboard/clipboard": "^1.14.1",

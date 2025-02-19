@@ -1,17 +1,13 @@
 import appFetch from "../utils/fetch";
 import { createAppAsyncThunk } from "./utils";
-import {
-  createCryptoContextFor,
-  Credential,
-} from "@pagopa/io-react-native-wallet";
+import { Credential } from "@pagopa/io-react-native-wallet";
 import {
   selectAttestation,
   shouldRequestAttestationSelector,
 } from "../store/reducers/attestation";
 import { selectPid } from "../store/reducers/pid";
+// import { selectCredentials } from "../store/reducers/credential";
 import { getAttestationThunk } from "./attestation";
-import { SdJwt } from "@pagopa/io-react-native-wallet";
-import type { InputDescriptor } from "src/credential/presentation/types";
 import type { PresentationStateKeys } from "../store/reducers/presentation";
 
 export type RemoteCrossDevicePresentationThunkInput = {
@@ -78,43 +74,59 @@ export const remoteCrossDevicePresentationThunk = createAppAsyncThunk<
       appFetch: appFetch,
     });
 
-  // We suppose that request is about PID
-  // In this case no check about other credentials
+  const credentialsSdJwt: [string, string][] = [];
+  const credentialsMdoc: [string, string][] = [];
+
   const pid = selectPid(getState());
   if (!pid) {
     throw new Error("PID not found");
   }
-  const pidCredentialJwt = SdJwt.decode(pid.credential);
+  credentialsSdJwt.push([pid.keyTag, pid.credential]);
 
-  // We support only one credential for now, we get first input_descriptor
-  const inputDescriptor =
-    presentationDefinition.input_descriptors[0] ||
-    ({} as unknown as InputDescriptor);
+  // const credentials = selectCredentials(getState());
+  // const mDL = credentials["org.iso.18013.5.1.mDL"];
+  // if (mDL?.credential) {
+  //   credentialsMdoc.push([mDL.keyTag, mDL.credential]);
+  // }
 
-  const { requiredDisclosures } =
-    Credential.Presentation.evaluateInputDescriptorForSdJwt4VC(
-      inputDescriptor,
-      pidCredentialJwt.sdJwt.payload,
-      pidCredentialJwt.disclosures
+  const evaluateInputDescriptors =
+    await Credential.Presentation.evaluateInputDescriptors(
+      presentationDefinition.input_descriptors,
+      credentialsSdJwt,
+      credentialsMdoc
     );
 
-  const disclosuresRequestedClaimName = [
-    ...requiredDisclosures.map((item) => item.decoded[1]),
-  ];
+  const credentialAndInputDescriptor = evaluateInputDescriptors.map(
+    (evaluateInputDescriptor) => {
+      // Present only the mandatory claims
+      const requestedClaims = [
+        ...evaluateInputDescriptor.evaluatedDisclosure.requiredDisclosures.map(
+          (item) => item.decoded[1]
+        ),
+      ];
+      return {
+        requestedClaims,
+        inputDescriptor: evaluateInputDescriptor.inputDescriptor,
+        credential: evaluateInputDescriptor.credential,
+        keyTag: evaluateInputDescriptor.keyTag,
+      };
+    }
+  );
 
-  const credentialCryptoContext = createCryptoContextFor(pid.keyTag);
+  const remotePresentations =
+    await Credential.Presentation.prepareRemotePresentations(
+      credentialAndInputDescriptor,
+      requestObject.nonce,
+      requestObject.client_id
+    );
 
   const authResponse =
     args.allowed === "acceptanceState"
       ? await Credential.Presentation.sendAuthorizationResponse(
           requestObject,
-          presentationDefinition,
+          presentationDefinition.id,
           jwks.keys,
-          [
-            pid.credential,
-            disclosuresRequestedClaimName,
-            credentialCryptoContext,
-          ],
+          remotePresentations,
           { appFetch: appFetch }
         )
       : await Credential.Presentation.sendAuthorizationErrorResponse(

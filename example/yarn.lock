@@ -1650,10 +1650,10 @@
   resolved "https://registry.npmjs.org/@pagopa/io-react-native-crypto/-/io-react-native-crypto-0.2.3.tgz"
   integrity sha512-cXJBwBsPUBxIFoTVXqlVc2zNgUuFPVdtIKu0WUyEGg8ZNOMGT9cRpE/qYx2uTY+hrYxtO8RKH6aXLsF43mYRBA==
 
-"@pagopa/io-react-native-jwt@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@pagopa/io-react-native-jwt/-/io-react-native-jwt-2.0.0.tgz#94225877f64a3bf7b7839880864f086109989995"
-  integrity sha512-GapO/oob7JmiBQ0TE2jJfeI+BEQRrxp3xL/zfkasb/jsq9m1eJuz+bEj4Wp+lQ2kQr3L9GYFMI8XrKkJfFzO4Q==
+"@pagopa/io-react-native-jwt@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@pagopa/io-react-native-jwt/-/io-react-native-jwt-2.1.0.tgz#a25efcf58d4efddb48db05053321d2ed79b69a74"
+  integrity sha512-KLesesGbDmQorBiqx6rMTh0gRMfTNv6JT8yHOIU89maESWkR0bjt/s0eBKyz45uWoBuPY2NmAq/Aubk/aEjHsQ==
   dependencies:
     js-base64 "^3.7.7"
     zod "^3.22.4"

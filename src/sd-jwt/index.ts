@@ -2,12 +2,13 @@ import { z } from "zod";
 
 import { decode as decodeJwt } from "@pagopa/io-react-native-jwt";
 import { verify as verifyJwt } from "@pagopa/io-react-native-jwt";
-import { sha256ToBase64 } from "@pagopa/io-react-native-jwt";
+import { SignJWT, sha256ToBase64 } from "@pagopa/io-react-native-jwt";
 import { Disclosure, SdJwt4VC, type DisclosureWithEncoded } from "./types";
 import { verifyDisclosure } from "./verifier";
 import type { JWK } from "../utils/jwk";
 import * as Errors from "./errors";
 import { Base64 } from "js-base64";
+import { type Presentation } from "../credential/presentation/types";
 
 const decodeDisclosure = (encoded: string): DisclosureWithEncoded => {
   const utf8String = Base64.decode(encoded); // Decode Base64 into UTF-8 string
@@ -161,6 +162,53 @@ export const verify = async <S extends z.ZodType<SdJwt4VC>>(
     sdJwt: decoded.sdJwt,
     disclosures: decoded.disclosures.map((d) => d.decoded),
   };
+};
+
+/**
+ * Prepares a Verified Presentation (VP) token to be sent as part of an
+ * authorization response in an OpenID 4 Verifiable Presentations flow.
+ *
+ * @param nonce - The nonce provided by the relying party.
+ * @param client_id - The client identifier of the relying party.
+ * @param presentation - An object containing the verifiable credential, the claims to disclose,
+ *                       and the cryptographic context for signing.
+ * @returns An object containing the signed VP token (`vp_token`).
+ *
+ * @remarks
+ *  1. The `disclose()` function is used to produce a token with only the requested claims.
+ *  2. A KB-JWT is then signed, including sd_hash and `nonce`.
+ *  3. The `vp_token` is composed of the disclosed VP and the KB-JWT.
+ */
+export const prepareVpToken = async (
+  nonce: string,
+  client_id: string,
+  [verifiableCredential, requestedClaims, cryptoContext]: Presentation
+): Promise<{
+  vp_token: string;
+}> => {
+  // Produce a VP token with only requested claims from the verifiable credential
+  const { token: vp } = await disclose(verifiableCredential, requestedClaims);
+
+  // <Issuer-signed JWT>~<Disclosure 1>~<Disclosure N>~
+  const sd_hash = await sha256ToBase64(`${vp}~`);
+
+  const kbJwt = await new SignJWT(cryptoContext)
+    .setProtectedHeader({
+      typ: "kb+jwt",
+      alg: "ES256",
+    })
+    .setPayload({
+      sd_hash,
+      nonce: nonce,
+    })
+    .setAudience(client_id)
+    .setIssuedAt()
+    .sign();
+
+  // <Issuer-signed JWT>~<Disclosure 1>~...~<Disclosure N>~<KB-JWT>
+  const vp_token = [vp, kbJwt].join("~");
+
+  return { vp_token };
 };
 
 export { SdJwt4VC, Errors };
