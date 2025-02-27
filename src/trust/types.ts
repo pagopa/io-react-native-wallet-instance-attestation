@@ -12,7 +12,6 @@ const RelyingPartyMetadata = z.object({
   jwks: z.object({ keys: z.array(JWK) }),
   contacts: z.array(z.string()).optional(),
 });
-//.passthrough();
 
 // Display metadata for a credential, used by the issuer to
 // instruct the Wallet Solution on how to render the credential correctly
@@ -50,7 +49,7 @@ const IssuanceErrorSupported = z.object({
   ),
 });
 
-// Metadata for a credentia which is supported by a Issuer
+// Metadata for a credential which is supported by an Issuer
 type SupportedCredentialMetadata = z.infer<typeof SupportedCredentialMetadata>;
 const SupportedCredentialMetadata = z.object({
   format: z.union([z.literal("vc+sd-jwt"), z.literal("vc+mdoc-cbor")]),
@@ -74,7 +73,7 @@ export const EntityStatement = z.object({
     iss: z.string(),
     sub: z.string(),
     jwks: z.object({ keys: z.array(JWK) }),
-    trust_marks: z.array(TrustMark),
+    trust_marks: z.array(TrustMark).optional(),
     iat: z.number(),
     exp: z.number(),
   }),
@@ -90,7 +89,7 @@ export const EntityConfigurationHeader = z.object({
 });
 
 /**
- * @see https://openid.net/specs/openid-connect-federation-1_0-29.html#name-federation-entity
+ * @see https://openid.net/specs/openid-federation-1_0-41.html
  */
 const FederationEntityMetadata = z
   .object({
@@ -99,6 +98,9 @@ const FederationEntityMetadata = z
     federation_resolve_endpoint: z.string().optional(),
     federation_trust_mark_status_endpoint: z.string().optional(),
     federation_trust_mark_list_endpoint: z.string().optional(),
+    federation_trust_mark_endpoint: z.string().optional(),
+    federation_historical_keys_endpoint: z.string().optional(),
+    endpoint_auth_signing_alg_values_supported: z.string().optional(),
     organization_name: z.string().optional(),
     homepage_uri: z.string().optional(),
     policy_uri: z.string().optional(),
@@ -107,7 +109,7 @@ const FederationEntityMetadata = z
   })
   .passthrough();
 
-// Structuire common to every Entity Configuration document
+// Structure common to every Entity Configuration document
 const BaseEntityConfiguration = z.object({
   header: EntityConfigurationHeader,
   payload: z

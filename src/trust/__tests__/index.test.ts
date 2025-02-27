@@ -71,7 +71,7 @@ describe("verifyTrustChain", () => {
     ).rejects.toThrow();
   });
 
-  it("should throw on emprty elements in trust chain", async () => {
+  it("should throw on empty elements in trust chain", async () => {
     await expect(
       verifyTrustChain(trustAnchorEntityConfiguration, [
         await signed(leafEntityConfiguration),
@@ -128,7 +128,7 @@ describe("verifyTrustChain", () => {
 });
 
 describe("EntityConfiguration", () => {
-  it("should not strip unknwon metadata fields", () => {
+  it("should not strip unknown metadata fields", () => {
     const withAdditionalField = {
       header: leafEntityConfiguration.header,
       payload: {

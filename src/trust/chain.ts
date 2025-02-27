@@ -53,7 +53,7 @@ const LastElementShape = z.union([
  * Validates a provided trust chain against a known trust
  *
  * @param trustAnchorEntity The entity configuration of the known trust anchor
- * @param chain The chain of statements to be validate
+ * @param chain The chain of statements to be validated
  * @returns The list of parsed token representing the chain
  * @throws {IoWalletError} If the chain is not valid
  */
@@ -85,7 +85,7 @@ export async function validateTrustChain(
   };
 
   // select keys from the next token
-  // if the current token is the last, keys fro  trust anchor will be used
+  // if the current token is the last, keys from trust anchor will be used
   const selectKeys = (currentIndex: number): JWK[] => {
     if (currentIndex === chain.length - 1) {
       return trustAnchorEntity.payload.jwks.keys;
@@ -101,7 +101,7 @@ export async function validateTrustChain(
   };
 
   // Iterate the chain and validate each element's signature against the public keys of its next
-  // If there is no next, hence it's the end of the chain and it must be verified by the Trust Anchor
+  // If there is no next, hence it's the end of the chain, and it must be verified by the Trust Anchor
   return Promise.all(
     chain
       .map((token, i) => [token, selectKid(i), selectKeys(i)] as const)
@@ -114,8 +114,8 @@ export async function validateTrustChain(
  *
  * @param chain The original chain
  * @param appFetch (optional) fetch api implementation
- * @returns A list of signed token that reprensent the trust chain, in the same order of the provided chain
- * @throws When an element of the chain fails to parse
+ * @returns A list of signed token that represent the trust chain, in the same order of the provided chain
+ * @throws IoWalletError When an element of the chain fails to parse
  */
 export function renewTrustChain(
   chain: string[],
