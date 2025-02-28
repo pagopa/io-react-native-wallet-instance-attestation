@@ -82,7 +82,7 @@ export const RequestObject = z.object({
   iss: z.string().optional(), //optional by RFC 7519, mandatory for Potential
   iat: UnixTime.optional(),
   exp: UnixTime.optional(),
-  state: z.string(),
+  state: z.string().optional(),
   nonce: z.string(),
   response_uri: z.string(),
   response_type: z.literal("vp_token"),
